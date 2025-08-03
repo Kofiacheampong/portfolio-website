@@ -1,0 +1,84 @@
+name: Deploy Portfolio to Production
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:  # Allows manual trigger from GitHub UI
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Deploy to server
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          # Create temporary directory for new deployment
+          mkdir -p /tmp/website-deploy
+          rm -rf /tmp/website-deploy/*
+    
+    - name: Copy files to server
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        source: "*.html,assets/*,styles/*,scripts/*"
+        target: "/tmp/website-deploy/"
+        strip_components: 0
+    
+    - name: Activate deployment
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          # Create backup of current site
+          sudo mkdir -p /var/backups/website
+          if [ -d "/var/www/html" ] && [ "$(ls -A /var/www/html)" ]; then
+            sudo cp -r /var/www/html /var/backups/website/backup-$(date +%Y%m%d-%H%M%S)
+          fi
+          
+          # Deploy new version
+          sudo rm -rf /var/www/html/*
+          sudo cp -r /tmp/website-deploy/* /var/www/html/
+          sudo chown -R nginx:nginx /var/www/html/
+          sudo chmod -R 755 /var/www/html/
+          
+          # Test nginx configuration
+          sudo nginx -t
+          
+          # Reload nginx if test passes
+          if [ $? -eq 0 ]; then
+            sudo systemctl reload nginx
+            echo "✅ Nginx reloaded successfully"
+          else
+            echo "❌ Nginx configuration test failed"
+            exit 1
+          fi
+          
+          # Cleanup temporary files
+          rm -rf /tmp/website-deploy
+    
+    - name: Verify deployment
+      run: |
+        sleep 5  # Wait for nginx reload
+        response=$(curl -s -o /dev/null -w "%{http_code}" https://kofiarcher.com)
+        if [ $response -eq 200 ]; then
+          echo "✅ Deployment verification successful! Site is accessible."
+        else
+          echo "❌ Deployment verification failed. HTTP status: $response"
+          exit 1
+        fi
+    
+    - name: Notify completion
+      run: |
+        echo "🚀 Portfolio deployed successfully to https://kofiarcher.com"
