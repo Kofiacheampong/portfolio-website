@@ -70,10 +70,14 @@ body {
   font-weight: 600;
   z-index: 1000;
   transition: top 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .skip-link:focus {
   top: 6px;
+  opacity: 1;
+  visibility: visible;
 }
 
 .container {
