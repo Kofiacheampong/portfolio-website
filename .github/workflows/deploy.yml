@@ -30,7 +30,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.SSH_KEY }}
-        source: "*.html,assets/*,styles/*,scripts/*"
+        source: "*.html,*.js,*.json,assets/*,styles/*,scripts/*"
         target: "/tmp/website-deploy/"
         strip_components: 0
     
@@ -50,7 +50,7 @@ jobs:
           # Deploy new version
           sudo rm -rf /var/www/html/*
           sudo cp -r /tmp/website-deploy/* /var/www/html/
-          sudo chown -R nginx:nginx /var/www/html/
+          sudo chown -R www-data:www-data /var/www/html/
           sudo chmod -R 755 /var/www/html/
           
           # Test nginx configuration
@@ -60,6 +60,10 @@ jobs:
           if [ $? -eq 0 ]; then
             sudo systemctl reload nginx
             echo "✅ Nginx reloaded successfully"
+            
+            # Clear any cached files to ensure updates are visible
+            sudo find /var/www/html -name "*.html" -exec touch {} \;
+            echo "✅ File timestamps updated to bust caches"
           else
             echo "❌ Nginx configuration test failed"
             exit 1
