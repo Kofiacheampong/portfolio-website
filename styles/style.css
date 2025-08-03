@@ -186,9 +186,9 @@ nav a:hover {
 
 .profile-photo {
   position: relative;
-  width: 350px;
+  width: 280px;
   height: 350px;
-  border-radius: 50%;
+  border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 20px 60px var(--shadow);
   border: 4px solid var(--accent);
