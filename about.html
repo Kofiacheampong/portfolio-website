@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn about Kofi Archer's journey as a full-stack developer and data analyst. Expertise in web development, data analytics, and infrastructure management." />
+  <meta name="keywords" content="Kofi Archer, about, full-stack developer, data analyst, software engineer" />
+  <meta name="author" content="Kofi Archer" />
+  <meta property="og:title" content="About Kofi Archer" />
+  <meta property="og:description" content="Learn about Kofi Archer's journey as a full-stack developer and data analyst." />
+  <meta property="og:type" content="website" />
+  <title>About – Kofi Archer</title>
+  <script src="config.js"></script>
+  <link rel="stylesheet" href="styles/style.css" id="main-css" />
+</head>
+<body>
+  <nav>
+    <div class="nav-content">
+      <div class="nav-brand">
+        <a href="index.html" class="brand-name">Kofi Archer</a>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+        </button>
+      </div>
+      <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="container">
+    <div class="about-content">
+      <div class="about-intro">
+        <h1 class="section-title">About Me</h1>
+        <p class="lead">
+          I'm <strong>Kofi Archer</strong>, a full-stack developer and data analyst who transforms complex problems into elegant digital solutions.
+        </p>
+      </div>
+      
+      <div class="about-grid">
+        <div class="about-section">
+          <h2>My Journey</h2>
+          <p>
+            My passion for technology began with curiosity about how things work behind the scenes. This led me through software engineering, data analytics, and infrastructure management, where I discovered my love for building scalable, maintainable systems.
+          </p>
+          <p>
+            I specialize in creating full-stack web applications, analyzing complex datasets, and deploying solutions on custom infrastructure. Every project teaches me something new, and I'm constantly exploring emerging technologies to stay at the forefront of development.
+          </p>
+        </div>
+        
+        <div class="about-section">
+          <h2>What I Do</h2>
+          <div class="skills-list">
+            <div class="skill-item">
+              <h3>🌐 Full-Stack Development</h3>
+              <p>Building end-to-end web applications with modern frameworks and clean, maintainable code.</p>
+            </div>
+            <div class="skill-item">
+              <h3>📊 Data Analytics</h3>
+              <p>Extracting insights from complex datasets using Python, APIs, and visualization tools.</p>
+            </div>
+            <div class="skill-item">
+              <h3>🖥️ Infrastructure & DevOps</h3>
+              <p>Deploying and managing applications on Ubuntu servers with Nginx and custom configurations.</p>
+            </div>
+            <div class="skill-item">
+              <h3>💼 Business Solutions</h3>
+              <p>Translating business requirements into technical solutions that drive real-world impact.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="about-section">
+          <h2>Beyond Code</h2>
+          <p>
+            When I'm not developing, I'm usually exploring cloud infrastructure, diving deep into football analytics, or working on innovative construction solutions. I believe in continuous learning and enjoy contributing to open source projects.
+          </p>
+          <p>
+            I'm particularly interested in the intersection of technology and traditional industries, finding ways to modernize processes and create efficiency through thoughtful automation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Update paths based on environment
+    document.addEventListener('DOMContentLoaded', function() {
+      // Update CSS link
+      document.getElementById('main-css').href = CONFIG.getStylePath('style.css');
+      
+      // Update navigation links
+      const navLinks = document.querySelectorAll('.nav-links a, .brand-name');
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === 'index.html') {
+          link.href = CONFIG.getPagePath('');
+        } else if (href.endsWith('.html')) {
+          link.href = CONFIG.getPagePath(href);
+        }
+      });
+    });
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const newTheme = html.dataset.theme === "dark" ? "light" : "dark";
+      html.dataset.theme = newTheme;
+      localStorage.setItem('theme', newTheme);
+    }
+
+    function toggleNav() {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.toggle('active');
+    }
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.dataset.theme = savedTheme;
+  </script>
+</body>
+</html>

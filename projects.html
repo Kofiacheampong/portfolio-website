@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Explore Kofi Archer's portfolio of projects including football analytics web apps, investment trackers, and business solutions." />
+  <meta name="keywords" content="projects, portfolio, web applications, football analytics, investment tracker, Flask, Python" />
+  <meta name="author" content="Kofi Archer" />
+  <meta property="og:title" content="Projects - Kofi Archer" />
+  <meta property="og:description" content="Explore Kofi Archer's portfolio of projects including web apps and data analysis tools." />
+  <meta property="og:type" content="website" />
+  <title>Projects – Kofi Archer</title>
+  <script src="config.js"></script>
+  <link rel="stylesheet" href="styles/style.css" id="main-css">
+
+</head>
+<body>
+  <nav>
+    <div class="nav-content">
+      <div class="nav-brand">
+        <a href="index.html" class="brand-name">Kofi Archer</a>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+        </button>
+      </div>
+      <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="container">
+    <h1 class="section-title">My Projects</h1>
+    <div id="projects" class="projects-grid"></div>
+  </section>
+  <script src="scripts/projects.js" id="projects-script"></script>
+  <script>
+    // Update paths based on environment
+    document.addEventListener('DOMContentLoaded', function() {
+      // Update CSS link
+      document.getElementById('main-css').href = CONFIG.getStylePath('style.css');
+      
+      // Update script src
+      document.getElementById('projects-script').src = CONFIG.getScriptPath('projects.js');
+      
+      // Update navigation links
+      const navLinks = document.querySelectorAll('.nav-links a, .brand-name');
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === 'index.html') {
+          link.href = CONFIG.getPagePath('');
+        } else if (href.endsWith('.html')) {
+          link.href = CONFIG.getPagePath(href);
+        }
+      });
+    });
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const newTheme = html.dataset.theme === "dark" ? "light" : "dark";
+      html.dataset.theme = newTheme;
+      localStorage.setItem('theme', newTheme);
+    }
+
+    function toggleNav() {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.toggle('active');
+    }
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.dataset.theme = savedTheme;
+  </script>
+</body>
+</html>

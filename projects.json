@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Football Analytics Web App",
+    "emoji": "⚽",
+    "description": "A Flask-based app that shows top scorers and stats across European leagues. Built with Bootstrap, hosted on Ubuntu with Nginx.",
+    "link": "http://192.168.1.172",
+    "technologies": ["Flask", "Python", "Bootstrap", "Ubuntu", "Nginx"]
+  },
+  {
+    "title": "Investment Tracker",
+    "emoji": "📈",
+    "description": "A minimalist stock tracking app using Yahoo Finance data. Includes sparkline charts and portfolio breakdowns.",
+    "link": "https://github.com/Kofiacheampong/InvestmentTracker",
+    "technologies": ["Python", "Yahoo Finance API", "Matplotlib", "Pandas"]
+  },
+  {
+    "title": "JAM Construction Estimator",
+    "emoji": "🏗 ️",
+    "description": "Estimating pipeline and business for a Black woman-owned startup construction company.",
+    "link": null,
+    "technologies": ["Business Analysis", "Excel", "Process Optimization"]
+  }
+]

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Get in touch with Kofi Archer for web development, data analysis, and consultation services." />
+  <meta name="keywords" content="contact, Kofi Archer, web development services, data analysis consultation" />
+  <meta name="author" content="Kofi Archer" />
+  <meta property="og:title" content="Contact Kofi Archer" />
+  <meta property="og:description" content="Get in touch with Kofi Archer for web development and data analysis services." />
+  <meta property="og:type" content="website" />
+  <title>Contact – Kofi Archer</title>
+  <script src="config.js"></script>
+  <link rel="stylesheet" href="styles/style.css" id="main-css" />
+  <style>
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    label {
+      font-weight: 600;
+      color: var(--text);
+    }
+    
+    input, textarea {
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      background: var(--card-bg);
+      color: var(--text);
+      transition: border-color 0.2s ease;
+      font-family: inherit;
+    }
+    
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    
+    input.error, textarea.error {
+      border-color: var(--error);
+    }
+    
+    .error-text {
+      color: var(--error);
+      font-size: 0.875rem;
+      min-height: 1.2em;
+    }
+    
+    button {
+      padding: 0.75rem 2rem;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+      align-self: flex-start;
+    }
+    
+    button:hover:not(:disabled) {
+      background: var(--text);
+      transform: translateY(-1px);
+    }
+    
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    
+    .form-status {
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 600;
+      min-height: 1rem;
+    }
+    
+    .form-status.success {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--success);
+      border: 1px solid var(--success);
+    }
+    
+    .form-status.error {
+      background: rgba(239, 68, 68, 0.1);
+      color: var(--error);
+      border: 1px solid var(--error);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-content">
+      <div class="nav-brand">
+        <a href="index.html" class="brand-name">Kofi Archer</a>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+        </button>
+      </div>
+      <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="container">
+    <h1 class="section-title">Contact</h1>
+    <form name="contact" method="POST" data-netlify="true" id="contact-form">
+      <input type="hidden" name="form-name" value="contact" />
+      
+      <div class="form-group">
+        <label for="name">Name *</label>
+        <input type="text" id="name" name="name" required aria-describedby="name-error" />
+        <div class="error-text" id="name-error"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required aria-describedby="email-error" />
+        <div class="error-text" id="email-error"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message *</label>
+        <textarea id="message" name="message" rows="5" required aria-describedby="message-error"></textarea>
+        <div class="error-text" id="message-error"></div>
+      </div>
+
+      <button type="submit" id="submit-btn" aria-describedby="form-status">Send Message</button>
+      <div class="form-status" id="form-status"></div>
+    </form>
+  </section>
+
+  <script>
+    // Update paths based on environment
+    document.addEventListener('DOMContentLoaded', function() {
+      // Update CSS link
+      document.getElementById('main-css').href = CONFIG.getStylePath('style.css');
+      
+      // Update navigation links
+      const navLinks = document.querySelectorAll('.nav-links a, .brand-name');
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === 'index.html') {
+          link.href = CONFIG.getPagePath('');
+        } else if (href.endsWith('.html')) {
+          link.href = CONFIG.getPagePath(href);
+        }
+      });
+    });
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const newTheme = html.dataset.theme === "dark" ? "light" : "dark";
+      html.dataset.theme = newTheme;
+      localStorage.setItem('theme', newTheme);
+    }
+
+    function toggleNav() {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.toggle('active');
+    }
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.dataset.theme = savedTheme;
+
+    // Form validation and submission
+    const form = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const formStatus = document.getElementById('form-status');
+
+    function showError(fieldId, message) {
+      const field = document.getElementById(fieldId);
+      const errorDiv = document.getElementById(fieldId + '-error');
+      field.classList.add('error');
+      errorDiv.textContent = message;
+    }
+
+    function clearError(fieldId) {
+      const field = document.getElementById(fieldId);
+      const errorDiv = document.getElementById(fieldId + '-error');
+      field.classList.remove('error');
+      errorDiv.textContent = '';
+    }
+
+    function validateForm() {
+      let isValid = true;
+      
+      // Clear previous errors
+      ['name', 'email', 'message'].forEach(clearError);
+      
+      // Validate name
+      const name = document.getElementById('name').value.trim();
+      if (name.length < 2) {
+        showError('name', 'Name must be at least 2 characters long');
+        isValid = false;
+      }
+      
+      // Validate email
+      const email = document.getElementById('email').value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        showError('email', 'Please enter a valid email address');
+        isValid = false;
+      }
+      
+      // Validate message
+      const message = document.getElementById('message').value.trim();
+      if (message.length < 10) {
+        showError('message', 'Message must be at least 10 characters long');
+        isValid = false;
+      }
+      
+      return isValid;
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      if (!validateForm()) {
+        return;
+      }
+      
+      // Show loading state
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+      formStatus.textContent = '';
+      formStatus.className = 'form-status';
+      
+      // Simulate form submission (replace with actual Netlify submission)
+      const formData = new FormData(form);
+      
+      fetch('/', {
+        method: 'POST',
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString()
+      })
+      .then(() => {
+        formStatus.textContent = 'Thank you! Your message has been sent successfully.';
+        formStatus.className = 'form-status success';
+        form.reset();
+      })
+      .catch(() => {
+        formStatus.textContent = 'Sorry, there was an error sending your message. Please try again.';
+        formStatus.className = 'form-status error';
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+      });
+    });
+
+    // Real-time validation
+    ['name', 'email', 'message'].forEach(fieldId => {
+      document.getElementById(fieldId).addEventListener('blur', function() {
+        validateForm();
+      });
+    });
+  </script>
+</body>
+</html>
