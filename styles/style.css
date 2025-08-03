@@ -58,6 +58,24 @@ body {
   font-size: 16px;
 }
 
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--accent);
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  z-index: 1000;
+  transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -80,12 +98,15 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 2rem;
 }
 
 .nav-links {
   display: flex;
   gap: 2rem;
   align-items: center;
+  flex: 1;
+  justify-content: center;
 }
 
 nav a {
@@ -128,6 +149,46 @@ nav a:hover {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  transition: all 0.2s ease;
+  color: var(--text);
+}
+
+.social-links a:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.social-links a svg {
+  transition: transform 0.2s ease;
+}
+
+.social-links a:hover svg {
+  transform: scale(1.1);
 }
 
 .brand-name {
@@ -213,27 +274,39 @@ nav a:hover {
   justify-content: center;
   height: 100%;
   color: var(--text);
-  opacity: 0.6;
   text-align: center;
   padding: 2rem;
+  background: linear-gradient(135deg, var(--card-bg), var(--bg));
 }
 
-.profile-placeholder svg {
-  margin-bottom: 1rem;
-  opacity: 0.4;
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
 }
 
-.profile-placeholder p {
-  font-size: 0.9rem;
+.profile-avatar svg {
+  color: white;
+}
+
+.profile-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.profile-info p {
+  font-size: 1rem;
   line-height: 1.4;
   margin: 0;
-}
-
-.profile-placeholder code {
-  background: var(--border);
-  padding: 0.2rem 0.4rem;
-  border-radius: 4px;
-  font-size: 0.8rem;
+  opacity: 0.8;
 }
 
 .hero-text {
@@ -665,6 +738,10 @@ p {
     display: flex;
   }
   
+  .nav-actions {
+    order: 2;
+  }
+  
   .nav-links {
     position: absolute;
     top: 100%;
@@ -678,6 +755,8 @@ p {
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
+    justify-content: flex-start;
+    flex: none;
   }
 
   .nav-links.active {
@@ -733,5 +812,14 @@ p {
   
   .skills-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .social-links {
+    gap: 0.5rem;
+  }
+  
+  .social-links a {
+    width: 36px;
+    height: 36px;
   }
 }

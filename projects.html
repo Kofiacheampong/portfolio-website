@@ -15,16 +15,11 @@
 
 </head>
 <body>
-  <nav>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <nav role="navigation" aria-label="Main navigation">
     <div class="nav-content">
       <div class="nav-brand">
         <a href="index.html" class="brand-name">Kofi Archer</a>
-        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="5"/>
-            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-          </svg>
-        </button>
       </div>
       <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">
         <span></span>
@@ -37,13 +32,37 @@
         <a href="projects.html">Projects</a>
         <a href="contact.html">Contact</a>
       </div>
+      <div class="nav-actions">
+        <div class="social-links">
+          <a href="https://linkedin.com/in/kofi-archer" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+              <rect x="2" y="9" width="4" height="12"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+          </a>
+          <a href="https://github.com/Kofiacheampong" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+            </svg>
+          </a>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+        </button>
+      </div>
     </div>
   </nav>
 
-  <section class="container">
+  <main id="main-content">
+    <section class="container">
     <h1 class="section-title">My Projects</h1>
     <div id="projects" class="projects-grid"></div>
   </section>
+  </main>
   <script src="scripts/projects.js" id="projects-script"></script>
   <script>
     // Update paths based on environment
