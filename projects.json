@@ -19,5 +19,12 @@
     "description": "Estimating pipeline and business for a Black woman-owned startup construction company.",
     "link": "jamconst.com",
     "technologies": ["Business Analysis", "Excel", "Process Optimization"]
+  },
+  {
+    "title": "Study Buddy Web App",
+    "emoji": "📚",
+    "description": "AI powered web app that can sumarize transcripts and provide study notes as well as generate flashcards.",
+    "link": "jamconst.com",
+    "technologies": ["Flask", "Tokenizers", "Transformers", "Python"]
   }
 ]
