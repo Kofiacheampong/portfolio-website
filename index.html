@@ -10,7 +10,13 @@
   <meta property="og:description" content="I build scalable web applications using Oracle Cloud infrastructure and create end-to-end solutions for modern businesses." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://kofiarcher.com" />
+  <meta property="og:image" content="https://kofiarcher.com/assets/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kofi Archer - Oracle Cloud Engineer & Developer" />
+  <meta name="twitter:description" content="Building scalable cloud applications and data-driven solutions" />
+  <meta name="twitter:image" content="https://kofiarcher.com/assets/og-image.jpg" />
   <title>Kofi Archer - Oracle Cloud Engineer & Developer</title>
+  <script src="config.js"></script>
   <link rel="stylesheet" href="styles/style.css" id="main-css" />
   <script type="application/ld+json">
   {
@@ -61,6 +67,14 @@
         <a href="contact.html">Contact</a>
       </div>
       <div class="nav-actions">
+        <a href="assets/Kofi_Archer_Resume.pdf" class="resume-download" download aria-label="Download Resume">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Resume
+        </a>
         <div class="social-links">
           <a href="https://linkedin.com/in/kofi-archer" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -107,8 +121,8 @@
           </div>
         </div>
         <div class="hero-text">
-          <h1 class="fade-in">Oracle Cloud Engineer</h1>
-          <p class="hero-subtitle fade-in">Hi, I'm <strong>Kofi Archer</strong>. I build scalable web applications using Oracle Cloud infrastructure, and create end-to-end solutions for your business needs.</p>
+          <h1 class="fade-in"> Data Engineer & Cloud Developer</h1>
+          <p class="hero-subtitle fade-in">Hi, I'm <strong>Kofi Archer</strong>. I build scalable data pipelines and cloud applications using Cloud infrastructure, and create end-to-end solutions for your business needs.</p>
           <div class="cta-buttons fade-in">
             <a href="projects.html" class="btn btn-primary" aria-label="View Kofi's portfolio projects">View My Work</a>
             <a href="contact.html" class="btn btn-outline" aria-label="Contact Kofi Archer">Get In Touch</a>
@@ -119,9 +133,55 @@
     </section>
   </main>
 
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-section">
+        <h3>Kofi Archer</h3>
+        <p>Data Engineer &  Cloud Developer</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <nav aria-label="Footer navigation">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="projects.html">Projects</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="footer-social">
+          <a href="https://linkedin.com/in/kofi-archer" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+              <rect x="2" y="9" width="4" height="12"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+          </a>
+          <a href="https://github.com/Kofiacheampong" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2025 Kofi Archer. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
   <script>
     // Update paths based on environment
     document.addEventListener('DOMContentLoaded', function() {
+      // Check if CONFIG is available
+      if (typeof CONFIG === 'undefined') {
+        console.log('CONFIG not loaded, using default paths');
+        return;
+      }
+      
       // Update CSS link
       document.getElementById('main-css').href = CONFIG.getStylePath('style.css');
       
@@ -136,7 +196,18 @@
         }
       });
       
-      // Update CTA buttons
+      // Update footer links
+      const footerLinks = document.querySelectorAll('footer nav a');
+      footerLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === 'index.html') {
+          link.href = CONFIG.getPagePath('');
+        } else if (href.endsWith('.html')) {
+          link.href = CONFIG.getPagePath(href);
+        }
+      });
+      
+      // Update CTA buttons in hero section
       const ctaLinks = document.querySelectorAll('.cta-buttons a');
       ctaLinks.forEach(link => {
         const href = link.getAttribute('href');
