@@ -3,102 +3,80 @@ name: Deploy Portfolio to Production
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:  # Allows manual trigger from GitHub UI
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    
-    - name: Deploy to server
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        script: |
-          # Create temporary directory for new deployment
-          mkdir -p /tmp/website-deploy
-          rm -rf /tmp/website-deploy/*
-    
-    - name: Copy files to server
+
+    - name: Upload site files to server
       uses: appleboy/scp-action@v0.1.7
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.SSH_KEY }}
-        source: "*.html,*.js,*.json,assets/*,styles/*,scripts/*"
-        target: "/tmp/website-deploy/"
-        strip_components: 0
-    
-    - name: Activate deployment
+        source: "."
+        target: "/home/opc/portfolio_tmp"
+        rm: true
+
+    - name: Deploy on server (SELinux-safe)
       uses: appleboy/ssh-action@v1.0.3
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         script: |
-          # Create backup of current site
-          sudo mkdir -p /var/backups/website
-          if [ -d "/var/www/portfolio" ] && [ "$(ls -A /var/www/portfolio)" ]; then
-            sudo cp -r /var/www/portfolio /var/backups/website/backup-$(date +%Y%m%d-%H%M%S)
-          fi
-          
-          # Deploy new version
-          sudo mkdir -p /var/www/portfolio
-          sudo rm -rf /var/www/portfolio/*
-          sudo cp -r /tmp/website-deploy/* /var/www/portfolio/
-          sudo chown -R www-data:www-data /var/www/portfolio/
-          sudo chmod -R 755 /var/www/portfolio/
-          
-          # Test nginx configuration
+          set -e
+
+          LIVE_DIR="/var/www/portfolio"
+          TMP_DIR="/home/opc/portfolio_tmp"
+
+          echo "🚚 Deploying site..."
+
+          sudo mkdir -p $LIVE_DIR
+
+          # Use rsync (NOT cp) to avoid SELinux label issues
+          sudo rsync -a --delete $TMP_DIR/ $LIVE_DIR/
+
+          # Correct ownership & permissions for Oracle Linux
+          sudo chown -R nginx:nginx $LIVE_DIR
+          sudo find $LIVE_DIR -type d -exec chmod 755 {} \;
+          sudo find $LIVE_DIR -type f -exec chmod 644 {} \;
+
+          # Restore SELinux context
+          sudo restorecon -Rv $LIVE_DIR
+
+          # Cleanup
+          rm -rf $TMP_DIR
+
+          echo "🧪 Testing Nginx configuration..."
           sudo nginx -t
-          
-          # Reload nginx if test passes
-          if [ $? -eq 0 ]; then
-            sudo systemctl reload nginx
-            echo "✅ Nginx reloaded successfully"
-            
-            # Clear any cached files to ensure updates are visible
-            sudo find /var/www/portfolio -name "*.html" -exec touch {} \;
-            echo "✅ File timestamps updated to bust caches"
-          else
-            echo "❌ Nginx configuration test failed"
-            exit 1
-          fi
-          
-          # Cleanup temporary files
-          rm -rf /tmp/website-deploy
-    
+
+          echo "🔄 Reloading Nginx..."
+          sudo systemctl reload nginx
+
+          echo "✅ Deployment completed successfully"
+
     - name: Verify deployment
       run: |
-        echo "Waiting for nginx to fully reload..."
-        sleep 10
-        
-        # Try verification with redirect following
+        echo "Waiting for site to reload..."
+        sleep 5
+
         for i in {1..3}; do
-          echo "Verification attempt $i..."
-          response=$(curl -s -L -o /dev/null -w "%{http_code}" https://kofiarcher.com)
-          echo "HTTP status: $response"
-          
-          if [ $response -eq 200 ]; then
-            echo "✅ Deployment verification successful! Site is accessible."
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://kofiarcher.com/portfolio)
+          echo "Attempt $i → HTTP $STATUS"
+
+          if [ "$STATUS" = "200" ]; then
+            echo "✅ Site is live"
             exit 0
-          else
-            echo "Attempt $i failed (status: $response), waiting 5 seconds..."
-            sleep 5
           fi
+
+          sleep 5
         done
-        
-        echo "❌ All verification attempts failed"
-        echo "Site may still be working - check manually at https://kofiarcher.com"
-        # Don't fail the deployment for verification issues
+
+        echo "⚠️ Verification did not return 200, check manually"
         exit 0
-    
-    - name: Notify completion
-      run: |
-        echo "🚀 Portfolio deployed successfully to https://kofiarcher.com"
-        echo "✅ Deployment complete"
