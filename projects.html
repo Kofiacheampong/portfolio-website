@@ -12,6 +12,8 @@
   <meta property="og:image" content="https://kofiarcher.com/assets/og-image.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <title>Projects – Kofi Archer</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="alternate icon" href="favicon.svg">
   <script src="config.js"></script>
   <link rel="stylesheet" href="styles/style.css" id="main-css">
 
@@ -70,7 +72,17 @@
   <main id="main-content">
     <section class="container">
     <h1 class="section-title">My Projects</h1>
-    <div id="projects" class="projects-grid"></div>
+    <div id="projects" class="projects-grid">
+      <noscript>
+        <div class="error-message">
+          <h3>JavaScript Required</h3>
+          <p>Please enable JavaScript to view the projects.</p>
+        </div>
+      </noscript>
+      <div class="loading-state">
+        <p>Loading projects...</p>
+      </div>
+    </div>
   </section>
   </main>
 
@@ -78,7 +90,7 @@
     <div class="container footer-content">
       <div class="footer-section">
         <h3>Kofi Archer</h3>
-        <p>Oracle Cloud Engineer & Full-Stack Developer</p>
+        <p>Data Engineer & Cloud Developer</p>
       </div>
       <div class="footer-section">
         <h4>Quick Links</h4>
