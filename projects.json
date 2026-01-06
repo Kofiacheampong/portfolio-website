@@ -1,5 +1,12 @@
 [
   {
+    "title": "Homelab Monitoring Stack",
+    "emoji": "📊",
+    "description": "Production-ready monitoring solution for homelab infrastructure using Prometheus, Grafana, and Caddy. Features automatic HTTPS, real-time Pi-hole DNS metrics, system performance tracking, and automated backups.",
+    "link": "https://github.com/Kofiacheampong/homelab",
+    "technologies": ["Docker", "Prometheus", "Grafana", "Caddy", "Node Exporter", "Linux"]
+  },
+  {
     "title": "Football Analytics Web App",
     "emoji": "⚽",
     "description": "A Flask-based app that shows top scorers and stats across European leagues. Built with Bootstrap, hosted on Ubuntu with Nginx.",
