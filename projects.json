@@ -1,37 +1,42 @@
 [
   {
-    "title": "Homelab Monitoring Stack",
+    "title": "Homelab Infrastructure Monitoring Stack",
     "emoji": "📊",
-    "description": "Production-ready monitoring solution for homelab infrastructure using Prometheus, Grafana, and Caddy. Features automatic HTTPS, real-time Pi-hole DNS metrics, system performance tracking, and automated backups.",
+    "description": "A full observability stack using Prometheus, Grafana, Alertmanager, Docker, and Caddy to monitor Pi-hole traffic and multi-host system metrics with automated alerts and backups.",
     "link": "https://github.com/Kofiacheampong/homelab",
-    "technologies": ["Docker", "Prometheus", "Grafana", "Caddy", "Node Exporter", "Linux"]
+    "technologies": ["Docker", "Prometheus", "Grafana", "Alertmanager", "Caddy", "Linux"],
+    "category": "Observability"
   },
   {
-    "title": "Football Analytics Web App",
+    "title": "EuroShots 2024 Football Data Analysis",
     "emoji": "⚽",
-    "description": "A Flask-based app that shows top scorers and stats across European leagues. Built with Bootstrap, hosted on Ubuntu with Nginx.",
-    "link": "https://github.com/Kofiacheampong/footballwebapp",
-    "technologies": ["Flask", "Python", "Bootstrap", "Ubuntu", "Nginx"]
+    "description": "A Python and Pandas analysis project focused on Euro 2024 shot statistics, player shooting efficiency, and team trends with Matplotlib and Seaborn visualizations.",
+    "link": "https://github.com/Kofiacheampong/euroshots_2024",
+    "technologies": ["Python", "Pandas", "Matplotlib", "Seaborn", "GitHub"],
+    "category": "Data"
   },
   {
-    "title": "Investment Tracker",
+    "title": "Restaurant Sales & Menu Insights",
     "emoji": "📈",
-    "description": "A minimalist stock tracking app using Yahoo Finance data. Includes sparkline charts and portfolio breakdowns.",
-    "link": "https://github.com/Kofiacheampong/InvestmentTracker",
-    "technologies": ["Python", "Yahoo Finance API", "Matplotlib", "Pandas"]
+    "description": "Operational data work supporting restaurant teams with customer behavior, sales trend analysis, and menu performance insights for leadership decision-making.",
+    "link": "",
+    "technologies": ["Data Analysis", "Sales Trends", "Customer Behavior", "Business Insights"],
+    "category": "Data"
   },
   {
-    "title": "JAM Construction Estimator",
+    "title": "UX Testing & Product Refinement",
+    "emoji": "🧭",
+    "description": "UX/UI work using usability testing, A/B testing, and cross-functional feedback to refine digital product experiences and improve user engagement.",
+    "link": "",
+    "technologies": ["UX Research", "A/B Testing", "Wireframes", "User Feedback"],
+    "category": "UX"
+  },
+  {
+    "title": "JAM Construction Estimation Workflow",
     "emoji": "🏗️",
-    "description": "Estimating pipeline and business for a Black woman-owned startup construction company.",
+    "description": "Business process and estimation workflow support for a construction startup, focused on clearer project estimates and pipeline organization.",
     "link": "https://jamconst.com",
-    "technologies": ["Business Analysis", "Excel", "Process Optimization"]
-  },
-  {
-    "title": "Study Buddy Web App",
-    "emoji": "📚",
-    "description": "AI powered web app that can summarize transcripts and provide study notes as well as generate flashcards.",
-    "link": "https://studybuddy-6b0i.onrender.com/study/",
-    "technologies": ["Flask", "Tokenizers", "Transformers", "Python"]
+    "technologies": ["Business Analysis", "Process Improvement", "Estimation Workflow"],
+    "category": "Business"
   }
 ]

@@ -16,16 +16,30 @@ const CONFIG = {
       assets: ''
     },
     production: {
-      base: '/portfolio/',
-      styles: '/portfolio/styles/',
-      scripts: '/portfolio/scripts/',
-      assets: '/portfolio/'
+      base: null,
+      styles: null,
+      scripts: null,
+      assets: null
     }
+  },
+
+  getProductionBasePath() {
+    return window.location.pathname.startsWith('/portfolio') ? '/portfolio/' : '/';
   },
   
   // Get the current environment's paths
   getCurrentPaths() {
-    return this.isLocal ? this.paths.local : this.paths.production;
+    if (this.isLocal) {
+      return this.paths.local;
+    }
+
+    const base = this.getProductionBasePath();
+    return {
+      base,
+      styles: `${base}styles/`,
+      scripts: `${base}scripts/`,
+      assets: base
+    };
   },
   
   // Helper functions to build URLs

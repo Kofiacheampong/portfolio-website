@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Get in touch with Kofi Archer for web development, data analysis, and consultation services." />
-  <meta name="keywords" content="contact, Kofi Archer, web development services, data analysis consultation" />
+  <meta name="description" content="Get in touch with Kofi Archer for IT support, data analysis, observability, UX research, and technical operations work." />
+  <meta name="keywords" content="contact, Kofi Archer, IT support, data analysis, observability, UX research, technical operations" />
   <meta name="author" content="Kofi Archer" />
   <meta property="og:title" content="Contact Kofi Archer" />
-  <meta property="og:description" content="Get in touch with Kofi Archer for web development and data analysis services." />
+  <meta property="og:description" content="Get in touch with Kofi Archer for IT support, data analysis, observability, and UX-informed technical work." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://kofiarcher.com/assets/og-image.jpg" />
+  <meta property="og:image" content="https://kofiarcher.com/portfolio/assets/profile-photo.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <title>Contact – Kofi Archer</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -29,6 +29,10 @@
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
+    }
+
+    .hidden-field {
+      display: none;
     }
     
     label {
@@ -163,7 +167,7 @@
 
     <div class="contact-intro">
       <p class="intro-text">
-        I'm available for freelance projects, consulting engagements, and full-time opportunities. Whether you're looking to build a data pipeline, deploy cloud infrastructure, or create a custom web application, I'd love to discuss how I can help.
+        I'm available for roles and projects involving IT support, data analysis, observability, technical operations, and UX-informed product work. Whether you need help making systems more reliable, turning operational data into insights, or improving a workflow, I'd love to discuss how I can help.
       </p>
     </div>
 
@@ -171,51 +175,55 @@
       <h2>Services I Offer</h2>
       <div class="services-grid">
         <div class="service-item">
-          <h3>Data Pipeline Development</h3>
-          <p>Design and implement scalable ETL pipelines, data integration solutions, and automated data workflows.</p>
+          <h3>IT Systems Support</h3>
+          <p>Troubleshooting software, hardware, network, and business system issues for distributed teams.</p>
         </div>
         <div class="service-item">
-          <h3>Cloud Infrastructure Setup</h3>
-          <p>Architecture, deployment, and management of cloud resources on Oracle Cloud, AWS, and Azure.</p>
+          <h3>Data Analysis & Reporting</h3>
+          <p>Cleaning, analyzing, and visualizing business or sports datasets with practical, stakeholder-friendly recommendations.</p>
         </div>
         <div class="service-item">
-          <h3>Custom Web Applications</h3>
-          <p>Full-stack development with Flask, Python, and modern frontend technologies, including deployment and hosting.</p>
+          <h3>Observability Setup</h3>
+          <p>Building lightweight monitoring systems with Docker, Prometheus, Grafana, Alertmanager, Caddy, and Linux.</p>
         </div>
         <div class="service-item">
-          <h3>Data Analytics & Business Intelligence</h3>
-          <p>Transform raw data into actionable insights with custom dashboards, reports, and analytics solutions.</p>
+          <h3>UX Research & Testing</h3>
+          <p>Using usability testing, A/B testing, and user feedback to improve digital product experiences.</p>
         </div>
         <div class="service-item">
-          <h3>Technical Consulting</h3>
-          <p>Architecture reviews, technology stack recommendations, and strategic guidance for data and cloud projects.</p>
+          <h3>Technical Operations</h3>
+          <p>Supporting go-lives, staff training, documentation, and communication between technical and business teams.</p>
         </div>
         <div class="service-item">
-          <h3>Infrastructure & DevOps</h3>
-          <p>Server administration, Nginx configuration, automated deployments, and system optimization.</p>
+          <h3>Business Process Support</h3>
+          <p>Mapping workflows, organizing project pipelines, and using data-backed insight to improve operational decisions.</p>
         </div>
       </div>
     </div>
 
     <h2 style="margin-top: 3rem; margin-bottom: 1.5rem;">Get In Touch</h2>
-    <form name="contact" method="POST" data-netlify="true" id="contact-form">
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form">
       <input type="hidden" name="form-name" value="contact" />
+      <div class="hidden-field" aria-hidden="true">
+        <label for="bot-field">Leave this field empty</label>
+        <input type="text" id="bot-field" name="bot-field" tabindex="-1" autocomplete="off" />
+      </div>
       
       <div class="form-group">
         <label for="name">Name *</label>
-        <input type="text" id="name" name="name" required aria-describedby="name-error" />
+        <input type="text" id="name" name="name" required maxlength="100" autocomplete="name" aria-describedby="name-error" />
         <div class="error-text" id="name-error"></div>
       </div>
 
       <div class="form-group">
         <label for="email">Email *</label>
-        <input type="email" id="email" name="email" required aria-describedby="email-error" />
+        <input type="email" id="email" name="email" required maxlength="254" autocomplete="email" aria-describedby="email-error" />
         <div class="error-text" id="email-error"></div>
       </div>
 
       <div class="form-group">
         <label for="message">Message *</label>
-        <textarea id="message" name="message" rows="5" required aria-describedby="message-error"></textarea>
+        <textarea id="message" name="message" rows="5" required maxlength="5000" aria-describedby="message-error"></textarea>
         <div class="error-text" id="message-error"></div>
       </div>
 
@@ -229,7 +237,7 @@
     <div class="container footer-content">
       <div class="footer-section">
         <h3>Kofi Archer</h3>
-        <p>Data Engineer & Cloud Developer</p>
+        <p>Data-Focused IT & Infrastructure</p>
       </div>
       <div class="footer-section">
         <h4>Quick Links</h4>
@@ -260,7 +268,7 @@
     </div>
     <div class="footer-bottom">
       <div class="container">
-        <p>&copy; 2025 Kofi Archer. All rights reserved.</p>
+        <p>&copy; 2026 Kofi Archer. All rights reserved.</p>
       </div>
     </div>
   </footer>
@@ -329,6 +337,9 @@
       if (name.length < 2) {
         showError('name', 'Name must be at least 2 characters long');
         isValid = false;
+      } else if (name.length > 100) {
+        showError('name', 'Name must be 100 characters or fewer');
+        isValid = false;
       }
       
       // Validate email
@@ -337,12 +348,18 @@
       if (!emailRegex.test(email)) {
         showError('email', 'Please enter a valid email address');
         isValid = false;
+      } else if (email.length > 254) {
+        showError('email', 'Email must be 254 characters or fewer');
+        isValid = false;
       }
       
       // Validate message
       const message = document.getElementById('message').value.trim();
       if (message.length < 10) {
         showError('message', 'Message must be at least 10 characters long');
+        isValid = false;
+      } else if (message.length > 5000) {
+        showError('message', 'Message must be 5000 characters or fewer');
         isValid = false;
       }
       
@@ -362,7 +379,6 @@
       formStatus.textContent = '';
       formStatus.className = 'form-status';
       
-      // Simulate form submission (replace with actual Netlify submission)
       const formData = new FormData(form);
       
       fetch('/', {
@@ -370,7 +386,10 @@
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData).toString()
       })
-      .then(() => {
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Form submission failed with status ${response.status}`);
+        }
         formStatus.textContent = 'Thank you! Your message has been sent successfully.';
         formStatus.className = 'form-status success';
         form.reset();

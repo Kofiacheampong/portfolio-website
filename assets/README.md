@@ -12,7 +12,7 @@
 - **Purpose**: Social media preview image when sharing your portfolio
 - **Recommended Size**: 1200x630 pixels
 - **Format**: JPG or PNG
-- **Action**: Create a professional image featuring your name, title, and branding
+- **Action**: Optional. Current pages use `profile-photo.jpg` so social previews do not point at a missing file.
 
 ### Profile Photo
 - **File**: `profile-photo.jpg`
